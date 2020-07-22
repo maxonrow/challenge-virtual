@@ -31,6 +31,11 @@
                 <v-btn @click="mint()">Enroll</v-btn>
               </v-row>
             </v-card>
+            <div class="pt-5">
+                <v-card dark class="pa-5 mx-10 mb-5">
+                  <div v-html="notification.mint"></div>
+                </v-card>
+              </div>
           </div>
           <div v-if="item.tab == 'Search'">
             <v-card class="mx-10">
@@ -44,15 +49,19 @@
                 <v-btn @click="search">Check</v-btn>
               </v-row>
             </v-card>
+            <div class="pt-5">
+                <v-card dark class="pa-5 mx-10">
+                <div>Transaction Type: <span style="color:yellow">{{notification.search.type}}</span></div>
+                <div>University: <span style="color:yellow">{{notification.search.owner}}</span></div>
+                <div>Token: <span style="color:yellow">{{notification.search.token}}</span></div>
+                <div>To: <span style="color:yellow">{{notification.search.to}}</span></div>
+                <div>Properties: <span style="color:yellow">{{notification.search.properties}}</span></div>
+                <div>Metadata: <span style="color:yellow">{{notification.search.metadata}}</span></div>
+              </v-card>
+              </div>
           </div>
         </v-tab-item>
       </v-tabs-items>
-    </v-card>
-    <v-card class="mx-10 my-5">
-      <!-- <div>Hash: {{ hash }}</div>
-      <div>Receipt</div> -->
-      <!-- <pre>{{ receipt }}</pre> -->
-      <pre class="pa-5">{{ notification }}</pre>
     </v-card>
     <v-overlay opacity="0.9" v-if="loading">
       {{ msg }}
@@ -88,7 +97,17 @@ export default {
   data: () => ({
     loading: false,
     msg: "",
-    notification: "Hello",
+    notification: {
+      mint: "Hello",
+      search: {
+        owner: "",
+        type: "",
+        value: "",
+        from: "",
+        to: "",
+        token: "",
+      },
+    },
     balance: 0,
     address: "",
     value: "",
@@ -101,6 +120,7 @@ export default {
     tokenList: [],
     tab: null,
     course: "",
+    courseName: "",
     hash: "",
     receipt: {},
     options: [],
@@ -177,27 +197,27 @@ export default {
         this.issuer
       ).then((nfToken) => {
         console.log("Token had been created");
-        // switch (i) {
-        //   case 1:
-        //     this.options.push({ text: "Supernatural Course", value: symbol });
-        //     break;
-        //   case 2:
-        //     this.options.push({ text: "Psychic Course", value: symbol });
-        //     break;
-        //   case 3:
-        //     this.options.push({ text: "Maths Course", value: symbol });
-        //     break;
-        //   case 4:
-        //     this.options.push({ text: "Geography Course", value: symbol });
-        //     break;
-        //   case 5:
-        //     this.options.push({ text: "Computer Course", value: symbol });
-        //     break;
-        //   default:
-        //     this.options.push({ text: "404", value: symbol });
-        //     break;
-        // }
-        this.options.push(symbol);
+        switch (i) {
+          case 1:
+            this.options.push({ text: "Supernatural Course", value: symbol });
+            break;
+          case 2:
+            this.options.push({ text: "Psychic Course", value: symbol });
+            break;
+          case 3:
+            this.options.push({ text: "Maths Course", value: symbol });
+            break;
+          case 4:
+            this.options.push({ text: "Geography Course", value: symbol });
+            break;
+          case 5:
+            this.options.push({ text: "Computer Course", value: symbol });
+            break;
+          default:
+            this.options.push({ text: "404", value: symbol });
+            break;
+        }
+        // this.options.push(symbol);
         return this.authourize(
           NonFungibleToken.approveNonFungibleToken,
           nfToken.symbol,
@@ -252,25 +272,23 @@ export default {
     mint() {
       this.loading = true;
       this.msg = "Minting item...";
-      console.log("You clicked me!!!");
-      const itemProp = {
-        symbol: this.course,
-        itemID: "ID :" + this.course,
-        properties: this.course + " class",
-        metadata: "Owned by: " + this.address,
-      };
       const str = this.course;
       const index = this.options.findIndex((item) => {
-        if (str == item) return item;
+        if (str == item.value) return item;
       });
-      console.log(index);
       var nft = this.tokenList[index];
-      console.log(nft);
+      this.courseName = this.options[index].text;
+      const itemProp = {
+        symbol: this.course,
+        itemID: "course :" + this.course,
+        properties: this.courseName + " from University of Reading",
+        metadata: "Owned by: " + this.address,
+      };
       nft.mint(this.address, itemProp).then((receipt) => {
         this.hash = receipt.hash;
         if (receipt.status == 1)
-          this.notification = "You have enrolled " + this.course;
-        else this.notification = "Failed to enroll";
+          this.notification.mint = "You have enrolled <span style='color:green'>" + this.courseName + "</span>";
+        else this.notification.mint = "<span style='color:red'>Failed to enroll</span>";
 
         this.loading = false;
       });
@@ -279,7 +297,12 @@ export default {
       this.providerConnection
         .getTransactionReceipt(this.hash)
         .then((receipt) => {
-          this.notification = receipt.payload.value.msg;
+          this.notification.search.type = receipt.payload.value.msg[0].type;
+          this.notification.search.owner = receipt.payload.value.msg[0].value.owner;
+          this.notification.search.properties = receipt.payload.value.msg[0].value.properties;
+          this.notification.search.metadata = receipt.payload.value.msg[0].value.metadata;
+          this.notification.search.to = receipt.payload.value.msg[0].value.to;
+          this.notification.search.token = receipt.payload.value.msg[0].value.symbol;
           return (this.receipt = receipt);
         });
     },
