@@ -13,25 +13,21 @@
 ## Starting Project
 
 ### Step 1
-- Open terminal go to social folder.
-```
-cd social
-```
+- Open terminal go to social folder `cd social`
 
 ### Step 2
-- If first time running thiss project download additional library inside this project
-```
-npm install
-```
+- If first time running thiss project download additional library inside this project `npm install`
 
 ### Step 3
-- Compiles and hot-reloads for testing
-```
-npm run serve
-```
+- Compiles and hot-reloads for testing `npm run serve`
 
 ### Step 4
 - Open the link show on terminal.
+```bash
+App running at:
+  - Local:   http://localhost:8080/ 
+  - Network: http://192.168.20.227:8080/
+```  
 
 After open the link you should see this
 ![Success Image](https://github.com/maxonrow/challenge-social/blob/master/images/page.png)
