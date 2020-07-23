@@ -195,7 +195,7 @@ export default {
     this.providerConnection.getBlockNumber().then((blockNumber) => {
       console.log("Latest block number: " + blockNumber);
     });
-    for (var i = 1; i < 2; i++) {
+    for (var i = 1; i < 4; i++) {
       await this.create(i);
     }
   },
@@ -321,19 +321,19 @@ export default {
         console.log("Token had been created");
         switch (i) {
           case 1:
-            this.options.push({ text: "Supernatural Course", value: symbol });
-            break;
-          case 2:
-            this.options.push({ text: "Psychic Course", value: symbol });
-            break;
-          case 3:
             this.options.push({ text: "Maths Course", value: symbol });
             break;
-          case 4:
+          case 2:
             this.options.push({ text: "Geography Course", value: symbol });
             break;
-          case 5:
+          case 3:
             this.options.push({ text: "Computer Course", value: symbol });
+            break;
+          case 4:
+            this.options.push({ text: "Supernatural Course", value: symbol });
+            break;
+          case 5:
+            this.options.push({ text: "Psychic Course", value: symbol });
             break;
           default:
             this.options.push({ text: "404", value: symbol });
@@ -374,7 +374,7 @@ export default {
       return NonFungibleToken.fromSymbol(symbol, this.issuer).then(
         (nfToken) => {
           console.log("Updated");
-          if (i == 1) this.loading = false;
+          if (i == 3) this.loading = false;
           return this.tokenList.push(nfToken);
         }
       );
