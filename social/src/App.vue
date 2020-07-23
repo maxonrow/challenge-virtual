@@ -33,7 +33,7 @@
                     ><v-text-field
                       v-model="mnemonic"
                       type="text"
-                      placeholder="wallet mnemonic"
+                      placeholder="Wallet Mnemonic (a random wordlist you get after wallet creation)"
                   /></v-col>
                   <v-btn @click="mint()">Enroll</v-btn>
                 </v-row>
@@ -52,7 +52,7 @@
                     Check Transaction
                   </v-col>
                   <v-col cols="12"
-                    ><v-text-field v-model="hash" type="text" placeholder="Hash"
+                    ><v-text-field v-model="hash" type="text" placeholder="Transaction Hash (e.g. 0x733e14cca169ea4c5234a11efd61e6abee3dfe37279040686c05314a6860c670)"
                   /></v-col>
                   <v-btn @click="search">Check</v-btn>
                 </v-row>
@@ -121,13 +121,13 @@
                     ><v-text-field
                       v-model="itemId"
                       type="text"
-                      placeholder="Item ID"
+                      placeholder="Item ID (Unique ID for the item)"
                   /></v-col>
                   <v-col cols="12"
                     ><v-text-field
                       v-model="mnemonic"
                       type="text"
-                      placeholder="Wallet mnemonic"
+                      placeholder="Wallet mnemonic (a random wordlist you get after wallet creation)"
                   /></v-col>
                   <v-btn @click="queryItem">Burn</v-btn>
                 </v-row>
