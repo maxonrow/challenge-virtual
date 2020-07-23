@@ -10,4 +10,28 @@
 - A trusted platform to find your merchants or any providers genuineness.
 - An online medical consultation platform for home-based or self quarantive patient with guarantee privacy.
 
-Nardo Lee, Please help help update this readme file on how to startup and use your project, step by step. Thanks :)
+## Starting Project
+
+### Step 1
+- Open terminal go to social folder.
+```
+cd social
+```
+
+### Step 2
+- If first time running thiss project download additional library inside this project
+```
+npm install
+```
+
+### Step 3
+- Compiles and hot-reloads for testing
+```
+npm run serve
+```
+
+### Step 4
+- Open the link show on terminal.
+
+After open the link you should see this
+![Success Image](https://github.com/maxonrow/challenge-welfare/tree/master/images/page.png)

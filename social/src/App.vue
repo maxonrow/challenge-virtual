@@ -1,68 +1,177 @@
 <template>
   <v-app>
-    <v-card class="ma-10 pb-10">
-      <v-tabs fixed-tabs v-model="tab">
-        <v-tab v-for="item in items" :key="item.tab">
-          {{ item.tab }}
-        </v-tab>
-      </v-tabs>
-
-      <v-tabs-items v-model="tab">
-        <v-tab-item v-for="item in items" :key="item.tab">
-          <div v-if="item.tab == 'Mint'">
-            <v-card class="mx-10">
-              <v-row class="pa-5 d-flex justify-center">
-                <v-col>
-                  Enroll Course
-                </v-col>
-                <v-col cols="12">
-                  <v-select
-                    :items="options"
-                    v-model="course"
-                    placeholder="Course"
-                  />
-                </v-col>
-                <v-col cols="12"
-                  ><v-text-field
-                    v-model="address"
-                    type="text"
-                    placeholder="wallet address"
-                /></v-col>
-                <v-btn @click="mint()">Enroll</v-btn>
-              </v-row>
-            </v-card>
-            <div class="pt-5">
+    <div class="navbar-wrapper pb-5">
+      <v-app-bar color="primary accent-4" dark>
+        <v-spacer></v-spacer>
+        <v-toolbar-title class="title">Social</v-toolbar-title>
+        <v-spacer></v-spacer>
+      </v-app-bar>
+    </div>
+    <div class="d-flex justify-center">
+      <v-card style="width:800px">
+        <v-tabs fixed-tabs v-model="tab">
+          <v-tab v-for="item in items" :key="item.tab">
+            {{ item.tab }}
+          </v-tab>
+        </v-tabs>
+        <v-tabs-items v-model="tab">
+          <v-tab-item v-for="item in items" :key="item.tab">
+            <div v-if="item.tab == 'Mint'">
+              <v-card class="mx-10">
+                <v-row class="pa-5 d-flex justify-center">
+                  <v-col>
+                    Enroll Course
+                  </v-col>
+                  <v-col cols="12">
+                    <v-select
+                      :items="options"
+                      v-model="course"
+                      placeholder="Course"
+                    />
+                  </v-col>
+                  <v-col cols="12"
+                    ><v-text-field
+                      v-model="mnemonic"
+                      type="text"
+                      placeholder="wallet mnemonic"
+                  /></v-col>
+                  <v-btn @click="mint()">Enroll</v-btn>
+                </v-row>
+              </v-card>
+              <div class="pt-5">
                 <v-card dark class="pa-5 mx-10 mb-5">
+                  <div style="text-decoration: underline overline">Output</div>
                   <div v-html="notification.mint"></div>
                 </v-card>
               </div>
-          </div>
-          <div v-if="item.tab == 'Search'">
-            <v-card class="mx-10">
-              <v-row class="pa-5 d-flex justify-center">
-                <v-col>
-                  Check Transaction
-                </v-col>
-                <v-col cols="12"
-                  ><v-text-field v-model="hash" type="text" placeholder="Hash"
-                /></v-col>
-                <v-btn @click="search">Check</v-btn>
-              </v-row>
-            </v-card>
-            <div class="pt-5">
-                <v-card dark class="pa-5 mx-10">
-                <div>Transaction Type: <span style="color:yellow">{{notification.search.type}}</span></div>
-                <div>University: <span style="color:yellow">{{notification.search.owner}}</span></div>
-                <div>Token: <span style="color:yellow">{{notification.search.token}}</span></div>
-                <div>To: <span style="color:yellow">{{notification.search.to}}</span></div>
-                <div>Properties: <span style="color:yellow">{{notification.search.properties}}</span></div>
-                <div>Metadata: <span style="color:yellow">{{notification.search.metadata}}</span></div>
+            </div>
+            <div v-if="item.tab == 'Search'">
+              <v-card class="mx-10">
+                <v-row class="pa-5 d-flex justify-center">
+                  <v-col>
+                    Check Transaction
+                  </v-col>
+                  <v-col cols="12"
+                    ><v-text-field v-model="hash" type="text" placeholder="Hash"
+                  /></v-col>
+                  <v-btn @click="search">Check</v-btn>
+                </v-row>
               </v-card>
+              <div class="pt-5">
+                <v-card dark class="pa-5 mx-10 mb-5">
+                  <div style="text-decoration: underline overline">Output</div>
+                  <div>
+                    Transaction Type:
+                    <span style="color:yellow">{{
+                      notification.search.type
+                    }}</span>
+                  </div>
+                  <div>
+                    University:
+                    <span style="color:yellow">{{
+                      notification.search.owner
+                    }}</span>
+                  </div>
+                  <div>
+                    Token:
+                    <span style="color:yellow">{{
+                      notification.search.token
+                    }}</span>
+                  </div>
+                  <div>
+                    Item ID:
+                    <span style="color:yellow">{{
+                      notification.search.itemId
+                    }}</span>
+                  </div>
+                  <div>
+                    To:
+                    <span style="color:yellow">{{
+                      notification.search.to
+                    }}</span>
+                  </div>
+                  <div>
+                    Properties:
+                    <span style="color:yellow">{{
+                      notification.search.properties
+                    }}</span>
+                  </div>
+                  <div>
+                    Metadata:
+                    <span style="color:yellow">{{
+                      notification.search.metadata
+                    }}</span>
+                  </div>
+                </v-card>
               </div>
-          </div>
-        </v-tab-item>
-      </v-tabs-items>
-    </v-card>
+            </div>
+            <div v-if="item.tab == 'Burn'">
+              <v-card class="mx-10">
+                <v-row class="pa-5 d-flex justify-center">
+                  <v-col>
+                    Drop Course
+                  </v-col>
+                  <v-col cols="12"
+                    ><v-text-field
+                      v-model="symbol"
+                      type="text"
+                      placeholder="Token Symbol"
+                  /></v-col>
+                  <v-col cols="12"
+                    ><v-text-field
+                      v-model="itemId"
+                      type="text"
+                      placeholder="Item ID"
+                  /></v-col>
+                  <v-col cols="12"
+                    ><v-text-field
+                      v-model="mnemonic"
+                      type="text"
+                      placeholder="Wallet mnemonic"
+                  /></v-col>
+                  <v-btn @click="queryItem">Burn</v-btn>
+                </v-row>
+              </v-card>
+              <div class="pt-5">
+                <v-card dark class="pa-5 mx-10 mb-5">
+                  <div style="text-decoration: underline overline">Output</div>
+                  <div>
+                    Transaction Type:
+                    <span style="color:yellow">{{
+                      notification.burn.type
+                    }}</span>
+                  </div>
+                  <div>
+                    Fee:
+                    <span style="color:yellow">{{
+                      notification.burn.fee
+                    }}</span>
+                  </div>
+                  <div>
+                    Token:
+                    <span style="color:yellow">{{
+                      notification.burn.token
+                    }}</span>
+                  </div>
+                  <div>
+                    ItemID:
+                    <span style="color:yellow">{{
+                      notification.burn.itemId
+                    }}</span>
+                  </div>
+                  <div>
+                    Requester:
+                    <span style="color:yellow">{{
+                      notification.burn.requester
+                    }}</span>
+                  </div>
+                </v-card>
+              </div>
+            </div>
+          </v-tab-item>
+        </v-tabs-items>
+      </v-card>
+    </div>
     <v-overlay opacity="0.9" v-if="loading">
       {{ msg }}
     </v-overlay>
@@ -76,6 +185,7 @@ import {
   NonFungibleTokenActions,
   NonFungibleToken,
 } from "mxw-sdk-js/dist/non-fungible-token";
+import { NonFungibleTokenItem } from "mxw-sdk-js/dist/non-fungible-token-item";
 
 export default {
   name: "App",
@@ -85,7 +195,7 @@ export default {
     this.providerConnection.getBlockNumber().then((blockNumber) => {
       console.log("Latest block number: " + blockNumber);
     });
-    for (var i = 1; i < 6; i++) {
+    for (var i = 1; i < 2; i++) {
       await this.create(i);
     }
   },
@@ -98,7 +208,7 @@ export default {
     loading: false,
     msg: "",
     notification: {
-      mint: "Hello",
+      mint: "Hello World",
       search: {
         owner: "",
         type: "",
@@ -107,15 +217,19 @@ export default {
         to: "",
         token: "",
       },
+      burn: {},
     },
     balance: 0,
-    address: "",
+    itemId: "",
+    symbol: "",
+    mnemonic: "",
     value: "",
     silentRpc: "",
     providerConnection: mxw.providers.Provider,
     provider: mxw.Wallet,
     issuer: mxw.Wallet,
     middleware: mxw.Wallet,
+    wallet: mxw.Wallet,
     token: NonFungibleToken,
     tokenList: [],
     tab: null,
@@ -127,6 +241,7 @@ export default {
     items: [
       { tab: "Mint", content: "test" },
       { tab: "Search", content: "test" },
+      { tab: "Burn", content: "test" },
     ],
   }),
   methods: {
@@ -158,7 +273,14 @@ export default {
         this.providerConnection
       );
     },
+    loadWallet() {
+      return (this.wallet = mxw.Wallet.fromMnemonic(this.mnemonic).connect(
+        this.providerConnection
+      ));
+    },
     create(i) {
+      this.mnemonic =
+        "angle about cactus pigeon weapon oval lonely derive veteran recycle air nice curtain expand meat family course illness busy night inherit model nerve twin";
       this.msg = "Generating course " + i + "...";
       let nonFungibleTokenProperties = null;
       let symbol = hexlify(randomBytes(4)).substring(2);
@@ -252,9 +374,8 @@ export default {
       return NonFungibleToken.fromSymbol(symbol, this.issuer).then(
         (nfToken) => {
           console.log("Updated");
-          if (i == 5) this.loading = false;
+          if (i == 1) this.loading = false;
           return this.tokenList.push(nfToken);
-          // return (this.token = nfToken);
         }
       );
     },
@@ -269,7 +390,8 @@ export default {
         return balance;
       });
     },
-    mint() {
+    async mint() {
+      await this.loadWallet();
       this.loading = true;
       this.msg = "Minting item...";
       const str = this.course;
@@ -278,17 +400,23 @@ export default {
       });
       var nft = this.tokenList[index];
       this.courseName = this.options[index].text;
+      let ID = hexlify(randomBytes(4)).substring(2);
       const itemProp = {
         symbol: this.course,
-        itemID: "course :" + this.course,
+        itemID: this.course + "#" + ID,
         properties: this.courseName + " from University of Reading",
-        metadata: "Owned by: " + this.address,
+        metadata: "Owned by: " + this.wallet.address,
       };
-      nft.mint(this.address, itemProp).then((receipt) => {
+      nft.mint(this.wallet.address, itemProp).then((receipt) => {
         this.hash = receipt.hash;
         if (receipt.status == 1)
-          this.notification.mint = "You have enrolled <span style='color:green'>" + this.courseName + "</span>";
-        else this.notification.mint = "<span style='color:red'>Failed to enroll</span>";
+          this.notification.mint =
+            "You have enrolled <span style='color:green'>" +
+            this.courseName +
+            "</span>";
+        else
+          this.notification.mint =
+            "<span style='color:red'>Failed to enroll</span>";
 
         this.loading = false;
       });
@@ -298,13 +426,46 @@ export default {
         .getTransactionReceipt(this.hash)
         .then((receipt) => {
           this.notification.search.type = receipt.payload.value.msg[0].type;
-          this.notification.search.owner = receipt.payload.value.msg[0].value.owner;
-          this.notification.search.properties = receipt.payload.value.msg[0].value.properties;
-          this.notification.search.metadata = receipt.payload.value.msg[0].value.metadata;
+          this.notification.search.owner =
+            receipt.payload.value.msg[0].value.owner;
+          this.notification.search.properties =
+            receipt.payload.value.msg[0].value.properties;
+          this.notification.search.metadata =
+            receipt.payload.value.msg[0].value.metadata;
           this.notification.search.to = receipt.payload.value.msg[0].value.to;
-          this.notification.search.token = receipt.payload.value.msg[0].value.symbol;
+          this.notification.search.token =
+            receipt.payload.value.msg[0].value.symbol;
+          this.notification.search.itemId =
+            receipt.payload.value.msg[0].value.itemID;
+          this.symbol = receipt.payload.value.msg[0].value.symbol;
+          this.itemId = receipt.payload.value.msg[0].value.itemID;
           return (this.receipt = receipt);
         });
+    },
+    queryItem() {
+      this.loading = true;
+      this.msg = "Burning item...";
+      return NonFungibleTokenItem.fromSymbol(
+        this.symbol,
+        this.itemId,
+        this.wallet
+      ).then((itemInstance) => {
+        console.log(itemInstance);
+        return this.burnItem(itemInstance);
+      });
+    },
+    burnItem(itemInstance) {
+      return itemInstance.burn().then((receipt) => {
+        this.notification.burn.fee = receipt.payload.value.fee.amount[0].amount;
+        this.notification.burn.type = receipt.payload.value.msg[0].type;
+        this.notification.burn.requester =
+          receipt.payload.value.msg[0].value.from;
+        this.notification.burn.itemId =
+          receipt.payload.value.msg[0].value.itemID;
+        this.notification.burn.token =
+          receipt.payload.value.msg[0].value.symbol;
+        this.loading = false;
+      });
     },
   },
 };
