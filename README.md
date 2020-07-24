@@ -1,38 +1,35 @@
-# Social
+# ![https://maxonrow.com](https://maxonrow.com/images/maxonrow_gold.png)
+
+## Social
 
 ## Problem Statement
 
 - To ensure everyone’s safety during a pandemic, we need to maintain physical distance, but as our regular lives become disrupted, how can we use blockchain technology to navigate this change? This is a challenge where we will allow creative freedom and evaluate the quality of the solution based on how well it solves the problem presented by each group.
 
-## Example Solution
+## Potential Solution
 
 - An online medical consultation platform for home-based or self-quarantined patients.  
 - A trusted platform to find your merchants or any providers genuineness.
 - An online medical consultation platform for home-based or self quarantive patient with guarantee privacy.
 
-## Starting Project
+## Start Up Social Project
 
-### Step 1
+### Step 1 - Start up blockchain localnet
 
-- Open terminal go to social folder `cd social`
+- Start localnet [here](https://github.com/maxonrow/maxathon/tree/master/blockchain-starter-kit)
 
-### Step 2
+### Step 2 - Clone project
 
-- If first time running thiss project download additional library inside this project `npm install`
+- Clone project `$ git clone https://github.com/maxonrow/challenge-social.git`
 
-### Step 3
+### Step 3 - Navigate to path
 
-- Compiles and hot-reloads for testing `sudo npm run serve`
+- Go to path `cd challenge-social/social`
 
-### Step 4
+### Step 4 - Build & run service
 
-- Open the link show on terminal.
+- run `npm i` & subsequently with `sudo npm run serve` & your service should be up at `http://localhost:3002/`
 
-```bash
-App running at:
-  - Local:   http://localhost:3002/
-  - Network: http://192.168.20.227:3002/
-```  
+### Step 5 - Expected output
 
-After open the link you should see this
-![Success Image](https://github.com/maxonrow/challenge-social/blob/master/images/page.png)
+![Expected output](images/page.png)
