@@ -20,11 +20,11 @@
 
 ### Step 2 - Clone project
 
-- Clone project `$ git clone https://github.com/maxonrow/challenge-newnorm.git`
+- Clone project `$ git clone https://github.com/maxonrow/challenge-virtual.git`
 
 ### Step 3 - Navigate to path
 
-- Go to path `cd challenge-newnorm/social`
+- Go to path `cd challenge-virtual/social`
 
 ### Step 4 - Build & run service
 
