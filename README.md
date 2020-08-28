@@ -2,7 +2,11 @@
 
 ## Virtualizing the New Norm
 
-## Problem Statement
+## The Problem We Want to Tackle
+
+Physical distancing has been adopted by almost every country to prevent the spread of COVID-19 and ensure everyone's safety during a pandemic. However, for the vast majority of us, our regular activities require us to be physically present around one another. People are now forced to reexamine ways to conduct their daily activities, which also sparks the conversation on how blockchain technology, especially non-fungible tokens (NFTs), can help us navigate and adapt to this change?
+
+## Summary of Problem Statement
 
 - To ensure everyone’s safety during a pandemic, we need to maintain physical distance. As our regular lives become disrupted, how can we use blockchain technology to navigate this change? This is a challenge where we will allow creative freedom and evaluate the quality of the solution based on how well it solves the problem presented by each group.
 
