@@ -37,3 +37,7 @@ Physical distancing has been adopted by almost every country to prevent the spre
 ### Step 5 - Expected output
 
 ![Expected output](images/social.png)
+
+### Step 6 - Checkout Article
+- checkout our [cookbook](https://medium.com/maxonrow/maxathon-challenge-4-virtualizing-the-new-norm-57bb1244e723).
+- please! remember to claps, follow & share. we will mint you something! You will find out soon!
